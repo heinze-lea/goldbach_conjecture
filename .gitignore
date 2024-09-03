@@ -16,13 +16,13 @@ __pycache__
 Thumbs.db
 
 # Large files
-artifacts/*
+# artifacts/*
 *.csv
 *.pickle
 *.pkl
 *.parquet
 *.zip
-*.png
+#*.png
 *.html
 
 # ignoring notebook checkpoints

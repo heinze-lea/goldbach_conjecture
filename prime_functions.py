@@ -43,14 +43,27 @@ def sieve_of_erathosthenes(
     return np.array(all_numbers)
 
 
+def pi_of_n(n: int, primes: np.array) -> int:
+
+    """
+    Returning an n-length array containing prime number density for every integer < n.
+
+    :param n: n, threshold for array length
+    :param primes: list of prime numbers
+    :return: array with index i, containing number of primes < i
+    """
+    # naive implementation, one could do more elegantly, but run time is so not an issue rn
+    return np.array([len(primes[(primes<i)]) for i in range(n)])
+
+
 def count_primes_in_nto2n(n: int, primes: np.array) -> int:
 
     """
     Calculate how many prime numbers can be found in [n, 2n].
 
-    :param n: n in [n, 2n] interval
-    :param primes: list of prime numbers known for an interval > [2, 2n]
-    :return: number of primes in [n, 2n]
+    :param n: n in [n, 2n) interval
+    :param primes: list of prime numbers known for an interval > [2, 2n)
+    :return: number of primes in [n, 2n)
     """
     return len(primes[(primes>=n) & (primes<2*n)])
 

@@ -3,12 +3,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # custom
-from prime_functions import sieve_of_erathosthenes, count_primes_in_nto2n, symmetric_prime_number_distances
+from prime_functions import (
+    sieve_of_erathosthenes,
+    count_primes_in_nto2n,
+    pi_of_n,
+    symmetric_prime_number_distances,
+)
+
+# ##### PARAMS ######
 
 compute_primes = False
 plot_distances = False
+saving_figs = False
 lim = 500000
 n_lim = int(lim/2)
+
+######################
 
 
 # <editor-fold desc="Calculate / Load prime numbers">
@@ -22,16 +32,18 @@ else:
 
 
 # Calculate pi(n) -> derive pi(2n) - pi(n) from there
+count_primes = pi_of_n(lim, prime_numbers)
 
 
 # Calculate pi(2n) - pi(n)
-ns = range(2, int(lim/2))
-count_primes = [count_primes_in_nto2n(n, prime_numbers) for n in ns]
+# TODO: put in count_primes_in_nto2n
+ns = range(int(lim/2))
+count_primes_n_to_2n = [count_primes[2*i] - count_primes[i] for i in ns]
 
 # <editor-fold desc="Plot pi(2n) - pi(n)">
 # Plot prime numbers between n and 2n with increasing n
 x = ns
-y = count_primes
+y = count_primes_n_to_2n
 
 a, b = np.polyfit(x, y, 1)
 # (np.float64(0.07661473506079812), np.float64(580.8583839413034))
@@ -47,8 +59,7 @@ plt.savefig(f'artifacts/plots/prime_count_nto2n.png')
 plt.show()
 # </editor-fold> (
 
-# Plot pi(2n) / pi(n)
-
+# TODO: Plot pi(2n) / pi(n)
 
 
 # <editor-fold desc="Calculate / Plot symmetric distances to prime numbers (i) over n">

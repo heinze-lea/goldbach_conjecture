@@ -17,6 +17,7 @@ Thumbs.db
 
 # Large files
 # artifacts/*
+*artifacts/plots/old/*
 *.csv
 *.pickle
 *.pkl

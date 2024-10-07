@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # custom
-from prime_functions import (
+from goldbach_conjecture.utils.prime_functions import (
     sieve_of_erathosthenes,
     pi_of_n,
     gauss_pi_n,
@@ -27,7 +27,7 @@ prime_artifacts = {}
 
 # <editor-fold desc="Calculate / Load prime numbers">
 if compute_primes:
-    primes = sieve_of_erathosthenes(lim, 'artifacts/primes/prime_100000.npy')
+    primes = sieve_of_erathosthenes(lim, '../../artifacts/primes/prime_100000.npy')
     np.save(f'artifacts/primes/prime_{str(lim)}.npy', primes)
 
 else:
@@ -194,7 +194,7 @@ prime_twin_abundance = [prime_twins_in_symmetric_distances(n, distances_to_prime
 
 prime_twin_abundance = np.array(prime_twin_abundance)
 prime_twin_abundance = prime_twin_abundance.T
-np.save(f'artifacts/primes/prime_twin_abundance_in_i_10000.npy', prime_twin_abundance)
+np.save(f'../../artifacts/primes/prime_twin_abundance_in_i_10000.npy', prime_twin_abundance)
 
 fig, ax = plt.subplots(1,2, figsize=(12,5))
 p1 = ax[0].scatter(np.arange(10000), count_distances[:10000], c=prime_twin_abundance[0], s=0.2)
@@ -216,6 +216,3 @@ plt.subplots_adjust(wspace=0.4)
 plt.savefig(f'artifacts/plots/prime_twins/n_distances_twin_abundance.png') if saving_figs else None
 plt.show()
 # </editor-fold>
-
-
-

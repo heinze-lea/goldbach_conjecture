@@ -14,7 +14,7 @@ $$ 2n = p_1 + p_2 $$
 - there can be more than one pair of prime numbers to sum up to n
 - $p_1$ and $p_2$ can be equal
 
-<br> 
+<br>
 A different perspective of the problem would be
 
 $$ 2n = (n - i) + (n + i) $$
@@ -33,8 +33,8 @@ We start heuristically to extend our naive understanding of the prime number dis
 The prime number distribution pi(n) typically is defined by the total number of primes smaller than n. pi(n)
 is known to be monotonously increasing and diverging to $\inf$. <br>
 In addition, we can explore the number of primes between n and 2n for any natural n. The Goldbach Conjecture
-suggests, that there always has to be a prime number between n and 2n, so that n+i can be prime for at least one i<n. 
-If we find that the number of primes between n & 2n is decreasing with higher n, that could be a first indicator that 
+suggests, that there always has to be a prime number between n and 2n, so that n+i can be prime for at least one i<n.
+If we find that the number of primes between n & 2n is decreasing with higher n, that could be a first indicator that
 Goldbach Conjecture might be wrong.
 
 *Result* <br>
@@ -49,5 +49,3 @@ The Goldbach Conjecture poses that there should be at least one i for any n so t
 there is often more than only one possible solution to i. It is interesting to explore:
 - the number of i found with increasing n
 - the maximum and minimum value of i
-
-

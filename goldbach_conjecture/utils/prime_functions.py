@@ -4,7 +4,7 @@ from time import time
 
 def sieve_of_erathosthenes(
     n_end: int,
-    file_first_primes: str == '',
+    file_first_primes: str = '',
 ) -> np.array:
 
     """
@@ -65,7 +65,10 @@ def gauss_pi_n(n: int) -> np.array:
     """
 
     # x = 0 and x = 1 return inf, but prime distribution is only meaningful from 2 onwards
-    return np.array([0, 0] + [x/np.log(x) for x in range(2, n)])
+    if n > 2:
+        return np.array([0, 0] + [x/np.log(x) for x in range(2, n)])
+    else:
+        return np.zeros(n)
 
 
 def count_primes_in_nto2n(n: int, primes_artifact: dict) -> list:
@@ -79,14 +82,19 @@ def count_primes_in_nto2n(n: int, primes_artifact: dict) -> list:
     :return: array with index i, containing number of primes in [i, 2i]
     """
 
-    try:
+    artifact_keys = list(primes_artifact.keys())
+
+    if 'pi_n' in artifact_keys:
         count_primes = primes_artifact['pi_n']
         return [count_primes[2 * i] - count_primes[i] for i in range(n)]
 
     # except that "pi_n" is not in prime_artifact dictionary
-    except KeyError:
+    elif 'primes' in artifact_keys:
         primes = primes_artifact['primes']
-        return [len(primes[(primes>=n) & (primes<2*n)]) for i in range(n)]
+        return [len(primes[(primes >= i) & (primes < 2*i)]) for i in range(n)]
+
+    else:
+        raise NotImplementedError("Dictionary primes_artifact neither contains list of primes nor list of prime densities.")
 
 
 def symmetric_prime_number_distances(n: int, primes: np.array) -> np.array:
@@ -150,9 +158,10 @@ def prime_twins_in_symmetric_distances(n: int, distances: list, prime_twins: np.
         n_distances = distances[n]
         # convert prime distances to prime numbers involved in distances
         dist_primes = [o for d in n_distances for o in [n - d, n + d]]
+        dist_primes_set = set(dist_primes)    # if n is prime, n occurs twice as dist_prime
         # filter down to prime twins
-        prime_twins_in_distances = list(set(dist_primes).intersection(set(prime_twins)))
+        prime_twins_in_distances = dist_primes_set.intersection(set(prime_twins))
         # return absolute and relative prime abundance
-        return len(prime_twins_in_distances), len(prime_twins_in_distances)/len(dist_primes)
+        return len(prime_twins_in_distances), len(prime_twins_in_distances)/len(dist_primes_set)
     else:
         return None, None
